@@ -7,5 +7,9 @@ Enflasyonlu Sigorta Bedeli ve Enflasyon Katsayısı Hesaplama Aracı
 Kullanım:
 Tarihleri gg.aa.YYYY şeklinde girilmeli. (Hata Mesajları Henüz Aktif Değil)
 
-Bug:
-1. Ardışık Hesaplamalarda Labeller Çoklu Geliyor
+Eksikler:
+
+- [x] Girişlerde 0 rakamı çıkması
+- [ ] Ardışık Hesaplamalarda Labeller Sıralanıyor
+- [ ] Tarih Girişlerinde Seperatör Bulunmuyor
+- [ ] Antivirüs Programları Tehdit Olarak Algılıyor
