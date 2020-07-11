@@ -13,4 +13,4 @@ Eksikler:
 - [x] Girişlerde 0 rakamı çıkması
 - [ ] Ardışık Hesaplamalarda Labeller Sıralanıyor
 - [ ] Tarih Girişlerinde Seperatör Bulunmuyor
-- [ ] Antivirüs Programları Tehdit Olarak Algılıyor
+- [x] Antivirüs Programları Tehdit Olarak Algılıyor
