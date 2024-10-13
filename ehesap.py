@@ -1,24 +1,21 @@
 #!/usr/bin/python3
-#ìkütüphaneler
+
+
+
+#kütüphaneler
 import datetime
 from tkinter import *
 import locale
-#from decimal import Decimal
-#import re
 
 #alanlar
 alanlar = ("Poliçe Başlangıç Tarihi", "Hasar Tarihi", "Enflasyon Oranı", "Sigortalı Bedeli", "Enflasyonlu Sigorta Bedeli","Katsayı")
-    
+
 #Hesaplama ve girdi tanımları
 def enflasyon_hesap(entries):
     #Tarihli entryleri tanımlama
     police_ilk = str(entries["Poliçe Başlangıç Tarihi"].get())
-    
-    #police_son = str(entries["Poliçe Bitiş Tarihi"].get())
     hasar_tar =  str(entries["Hasar Tarihi"].get())
     pit = datetime.datetime.strptime(police_ilk, "%d.%m.%Y")
-    
-    #pst = datetime.datetime.strptime(police_son, "%d.%m.%Y")
     htt = datetime.datetime.strptime(hasar_tar, "%d.%m.%Y")
 
     #Enflasyon oranı girdisi
@@ -26,8 +23,7 @@ def enflasyon_hesap(entries):
     sig_bed = float(entries["Sigortalı Bedeli"].get())  
     
     #Hasarlı Gün Sayısını Hesaplama (Poliçe Başlangıç Tarihi - Hasar Tarihi )
-    gunsayi = (htt - pit)
-    gunsayi = gunsayi.days
+    gunsayi = (htt - pit).days
     global sayi
     sayi = gunsayi
     #print(gunsayi)
@@ -42,8 +38,10 @@ def enflasyon_hesap(entries):
     enf_sig_bed = enflasyon_artis_katsayi *sig_bed
     
     enflasyon_artis_katsayi = ("%0.7f" % enflasyon_artis_katsayi).strip()
+
+    #locale ayarkarı
     locale.setlocale(locale.LC_ALL, '')
-    enf_sig_bed = locale.format("%0.2f", enf_sig_bed, grouping = True)
+    enf_sig_bed = locale.format_string("%0.2f", enf_sig_bed, grouping = True)
     f = enf_sig_bed + " TL"
     #Ekrana yazdırma
     entries["Katsayı"].delete(0,END)
@@ -93,21 +91,4 @@ if __name__ == '__main__':
               command=(lambda e=ents: enflasyon_hesap(e)))
    b1.pack(side=LEFT, padx=5, pady=5)
    root.mainloop()
-"""   
-   def log():
-     log= {"\nSigorta Bedeli =" : sig_bed, "Hasarlı Gün Sayısı =" : sayi, "Enflasyon Artış Katsayı = ": enflasyon_artis_katsayi}
-     log = str(log)
-     ths = open("log.txt", "a")
-     ths.write(log)
-     ths.close()
-     
-#label oluşturma günsayı    
-   def gunsayiolusturma():
-     labelframe = LabelFrame(root,text = "Hasarlı Gün Sayısı")
-     labelframe.pack(fill = "both", expand = "yes")
-    
-     left = Label(labelframe, text = sayi)
-     left.pack()   
-   gunsayiolusturma()
-   log()
- """
+   
