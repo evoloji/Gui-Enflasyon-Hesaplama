@@ -1,6 +1,6 @@
 # Gui-Enflasyon-Hesaplama
-![alt text](https://github.com/evoloji/Gui-Enflasyon-Hesaplama/blob/master/bos.jpg)
-![alt text](https://github.com/evoloji/Gui-Enflasyon-Hesaplama/blob/master/run.jpg)
+![alt text](https://github.com/evoloji/Gui-Enflasyon-Hesaplama/blob/master/0.png)
+![alt text](https://github.com/evoloji/Gui-Enflasyon-Hesaplama/blob/master/1.png)
 
 Hasar Dosyalarında Poliçe Sigorta Bedeli Enflasyonu Hesaplama Aracı
 Enflasyonlu Sigorta Bedeli ve Enflasyon Katsayısı Hesaplama Aracı
