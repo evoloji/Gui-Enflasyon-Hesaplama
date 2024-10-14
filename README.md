@@ -2,14 +2,19 @@
 ![alt text](https://github.com/evoloji/Gui-Enflasyon-Hesaplama/blob/master/bos.jpg)
 ![alt text](https://github.com/evoloji/Gui-Enflasyon-Hesaplama/blob/master/run.jpg)
 
-Poliçe Enflasyon Hesaplama Aracı
+Hasar Dosyalarında Poliçe Sigorta Bedeli Enflasyonu Hesaplama Aracı
 Enflasyonlu Sigorta Bedeli ve Enflasyon Katsayısı Hesaplama Aracı
 
 Kullanım:
-Tarihleri gg.aa.YYYY şeklinde girilmeli. (Hata Mesajları Henüz Aktif Değil)
+Tarihleri gg.aa.YYYY şeklinde girilmeli.
 
-Eksikler:
+```sh
+# terminal
+git clone https://github.com/evoloji/Gui-Enflasyon-Hesaplama.git
+ls Gui-Enflasyon-Hesaplama
 
-- [x] Girişlerde 0 rakamı çıkması
-- [ ] Ardışık Hesaplamalarda Labeller Sıralanıyor
-- [ ] Tarih Girişlerinde Seperatör Bulunmuyor
+# çalıştır
+python ehesap.py
+```
+
+
