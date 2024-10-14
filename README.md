@@ -5,7 +5,6 @@
 </div>
 
 Hasar Dosyalarında Poliçe Sigorta Bedeli Enflasyonu Hesaplama Aracı
-Enflasyonlu Sigorta Bedeli ve Enflasyon Katsayısı Hesaplama Aracı
 
 Kullanım:
 Tarihleri gg.aa.YYYY şeklinde girilmeli.
