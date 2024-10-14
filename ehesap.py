@@ -9,7 +9,7 @@ from tkinter import *
 import locale
 
 #alanlar
-alanlar = ("Poliçe Başlangıç Tarihi", "Hasar Tarihi", "Enflasyon Oranı", "Sigortalı Bedeli", "Enflasyonlu Sigorta Bedeli","Katsayı")
+alanlar = ("Poliçe Başlangıç Tarihi", "Hasar Tarihi", "Enflasyon Oranı", "Sigortalı Bedeli", "Enflasyonlu Sigorta Bedeli","Katsayı", "Gün Sayısı")
 
 #Hesaplama ve girdi tanımları
 def enflasyon_hesap(entries):
@@ -45,34 +45,36 @@ def enflasyon_hesap(entries):
     output_vars["Katsayı"].set(f"{enflasyon_artis_katsayi:.7f}")  # Katsayıyı güncelle
     enf_sig_bed_str = locale.format_string("%0.2f", enf_sig_bed, grouping=True) + " TL"
     output_vars["Enflasyonlu Sigorta Bedeli"].set(enf_sig_bed_str)  # Sigorta bedelini güncelle
-
+    output_vars["Gün Sayısı"].set(gunsayi)
     
     #Sigorta Bedeli * Katsayı
     enflasyon_artis_katsayi = ("%0.7f" % enflasyon_artis_katsayi).strip()
 
-    #locale ayarkarı
+    #locale ayarları
     locale.setlocale(locale.LC_ALL, '')
     enf_sig_bed = locale.format_string("%0.2f", enf_sig_bed, grouping = True)
     f = enf_sig_bed + " TL"
-    #Ekrana yazdırma
-    entries["Katsayı"].delete(0,END)
-    entries["Katsayı"].insert(0,enflasyon_artis_katsayi)
-    #print("Katsayı Oran: %f8" % float(enflasyon_artis_katsayi))
-    #enf_sig_bed = ("{:.2f}".format(enf_sig_bed))
     
-    entries["Enflasyonlu Sigorta Bedeli"].delete(0,END)
-    entries["Enflasyonlu Sigorta Bedeli"].insert(0,f)
-
-    if 'left' in globals():
-     left.destroy()  # Mevcut label'ı temizle
-    
-    labelframe = LabelFrame(root,text = "Başlangıçtan İtibaren Geçen Gün Sayısı")
-    labelframe.pack(fill = "both", expand = "yes")
-    
-    left = Label(labelframe, text = sayi)
-    left.pack() 
-
-#Şablon oluşturması    
+# Tarih formatını otomatik olarak düzenleme
+def format_tarih(event, entry):
+    if event.keysym == "BackSpace":
+        entry.config(state='normal')
+        return
+    value = entry.get().replace(".", "")
+    if len(value) >= 2:
+        value = value[:2] + '.' + value[2:]
+    if len(value) >= 5:
+        value = value[:5] + '.' + value[5:]
+    entry.delete(0, END)
+    entry.insert(0, value)
+    # Eğer tarih formatı tamamlandıysa, girişi sadece okunur hale getir
+    if len(value) == 10:  # gg.aa.YYYY formatı için 10 karakter
+        try:
+            datetime.datetime.strptime(value, "%d.%m.%Y")  # Geçerli tarih formatı
+            entry.config(state='readonly')  # Girişi sadece okunur yap
+        except ValueError:
+            entry.config(state='normal')  # Hatalı tarih girilmişse normal hale getir
+            #Şablon oluşturması    
 def makeform(root, alanlar):
    entries = {}
    output_vars = {}
@@ -86,12 +88,18 @@ def makeform(root, alanlar):
       ent.pack(side=RIGHT, expand=YES, fill=X)
       entries[field] = ent
       # Eğer çıkış alanı ise StringVar oluştur
-      if field in ["Enflasyonlu Sigorta Bedeli", "Katsayı"]:
+      if field in ["Enflasyonlu Sigorta Bedeli", "Katsayı", "Gün Sayısı"]:
         var = StringVar()
         ent.config(state='readonly')  # Okunmaz hale getir
         ent['textvariable'] = var
         output_vars[field] = var
+      if field in ["Poliçe Başlangıç Tarihi", "Hasar Tarihi"]:
+        ent.bind("<KeyRelease>", lambda event, e = ent: format_tarih(event,e))
    return entries, output_vars
+
+
+
+# ###MAİN### #
 
 if __name__ == '__main__':
    root = Tk()
